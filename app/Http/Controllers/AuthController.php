@@ -16,8 +16,8 @@ class AuthController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'email' => 'required|email',
-                'password' => 'required'
+                'email' => 'required|email|string',
+                'password' => 'required|string'
             ]
         );
         if ($validator->fails()) {
@@ -44,10 +44,10 @@ class AuthController extends Controller
                     'token' => $token
                 ], 200);
             } else {
-                return response()->json(['error' => 'Invalid credentials'], 401);
+                return response()->json(['error' => 'Ntago wemerewe'], 401);
             }
         } else {
-            return response()->json(['error' => 'Invalid email'], 401);
+            return response()->json(['error' => 'Email ntago yemewe'], 401);
         }
     }
 
@@ -76,7 +76,7 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
         return response()->json([
-            'message' => 'account created',
+            'message' => 'Kwandikisha konti yanyu byakunze',
         ], 200);
     }
 
@@ -85,10 +85,10 @@ class AuthController extends Controller
         if (Auth::guard('api')->check()) {
             Auth::logout();
             return response()->json([
-                'message' => 'User signed out',
+                'message' => 'Wasohotse',
             ], 200);
         } else {
-            return response()->json(['error' => 'Invalid user session'], 401);
+            return response()->json(['error' => 'Kubikora ntubyemerewe'], 401);
         }
     }
 }

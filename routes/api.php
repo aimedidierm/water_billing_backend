@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MeterController;
+use App\Http\Controllers\MeterReadingsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,8 +29,10 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::group(["prefix" => "admin", "middleware" => ["auth:api", "adminCheck"], "as" => "admin."], function () {
     Route::apiResource('/users', UserController::class)->only('index', 'store', 'update', 'destroy');
     Route::get('/settings', [UserController::class, 'show']);
+    Route::apiResource('/meters', MeterController::class)->only('index', 'store');
 });
 
 Route::group(["prefix" => "client", "middleware" => ["auth:api", "clientCheck"], "as" => "client."], function () {
     Route::get('/settings', [UserController::class, 'show']);
+    Route::apiResource('/readings', MeterReadingsController::class)->only('store');
 });
