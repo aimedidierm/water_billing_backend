@@ -58,6 +58,7 @@ class AuthController extends Controller
             [
                 "email" => "required|email|unique:users,email",
                 "name" => "required",
+                "phone" => "required|string",
                 "password" => "required",
             ]
         );
@@ -72,6 +73,7 @@ class AuthController extends Controller
         $user = new User;
         $user->email = $request->email;
         $user->name = $request->name;
+        $user->phone = $request->phone;
         $user->role = 'client';
         $user->password = bcrypt($request->password);
         $user->save();

@@ -25,6 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/logout', [AuthController::class, 'logout']);
+Route::get('/profile', [UserController::class, 'edit']);
+Route::put('/profile', [UserController::class, 'updateApi']);
 
 Route::group(["prefix" => "admin", "middleware" => ["auth:api", "adminCheck"], "as" => "admin."], function () {
     Route::apiResource('/users', UserController::class)->only('index', 'store', 'update', 'destroy');
