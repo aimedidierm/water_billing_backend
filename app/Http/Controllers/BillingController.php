@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Billing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BillingController extends Controller
 {
@@ -12,7 +13,16 @@ class BillingController extends Controller
      */
     public function index()
     {
-        //
+        $bills = Billing::latest()->latest()->get();
+        $bills->load('user', 'meter');
+        return response()->json($bills, 200);
+    }
+
+    public function clientListing()
+    {
+        $bills = Billing::latest()->latest()->where('user_id', Auth::id())->get();
+        $bills->load('user', 'meter');
+        return response()->json($bills, 200);
     }
 
     /**

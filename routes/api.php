@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\MeterController;
 use App\Http\Controllers\MeterReadingsController;
 use App\Http\Controllers\UserController;
@@ -32,9 +33,11 @@ Route::group(["prefix" => "admin", "middleware" => ["auth:api", "adminCheck"], "
     Route::apiResource('/users', UserController::class)->only('index', 'store', 'update', 'destroy');
     Route::get('/settings', [UserController::class, 'show']);
     Route::apiResource('/meters', MeterController::class)->only('index', 'store');
+    Route::apiResource('/billing', BillingController::class)->only('index');
 });
 
 Route::group(["prefix" => "client", "middleware" => ["auth:api", "clientCheck"], "as" => "client."], function () {
     Route::get('/settings', [UserController::class, 'show']);
-    Route::apiResource('/readings', MeterReadingsController::class)->only('store');
+    Route::apiResource('/readings', MeterReadingsController::class)->only('index', 'store');
+    Route::get('/billing', [BillingController::class, 'clientListing']);
 });

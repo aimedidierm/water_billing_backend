@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->get();
+        $users = User::latest()->where('role', 'client')->get();
         return response()->json(['users' => $users], 200);
     }
 

@@ -7,6 +7,7 @@ use App\Models\MeterReadings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Support\Facades\Auth;
 
 class MeterReadingsController extends Controller
 {
@@ -15,7 +16,10 @@ class MeterReadingsController extends Controller
      */
     public function index()
     {
-        //
+        $readings = MeterReadings::latest()->where('user_id', Auth::id())
+            ->get();
+        $readings->load('meter', 'user');
+        return response()->json(['readings' => $readings], 200);
     }
 
     /**

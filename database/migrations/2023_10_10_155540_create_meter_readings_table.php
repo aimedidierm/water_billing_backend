@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('readings');
             $table->float('volume')->default(0.00);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->on('users')->references('id')->onDelete("restrict");
             $table->unsignedBigInteger('meter_id');
             $table->foreign('meter_id')->on('meters')->references('id')->onDelete("restrict");
             $table->timestamps();
