@@ -68,10 +68,10 @@ class MeterReadingsController extends Controller
                 $data->save();
                 return response()->json(['message' => 'Imibre a konteri yagiye muri system'], 200);
             } else {
-                return response()->json(["errors" => "Imibare iri muri konteri ntago ari $request->readings"], 200);
+                return response()->json(["errors" => "Imibare iri muri konteri ntago ari $request->readings"], 403);
             }
         } else {
-            return response()->json(['errors' => 'Konteri ntibonetse'], 200);
+            return response()->json(['errors' => 'Konteri ntibonetse'], 403);
         }
     }
 
