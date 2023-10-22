@@ -39,7 +39,7 @@ class MeterReadingsController extends Controller
             $request->all(),
             [
                 "readings" => "required",
-                "meter_id" => "required|integer",
+                "meter_id" => "required|string",
             ]
         );
         if ($validator->fails()) {
@@ -49,7 +49,8 @@ class MeterReadingsController extends Controller
             ], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $meter = Meter::find($request->meter_id);
+        $meter = Meter::where('meterId', $request->meter_id)->first();
+        // $meter = Meter::find($request->meter_id);
         if ($meter) {
             $lastReadings = MeterReadings::latest()->where('meter_id', $request->meter_id)->first();
             $lastVolume = 0;
@@ -61,7 +62,7 @@ class MeterReadingsController extends Controller
                 $data = new MeterReadings;
                 $data->readings = $request->readings;
                 $data->volume = $volume;
-                $data->meter_id = $request->meter_id;
+                $data->meter_id = $meter->meter_id;
                 $data->created_at = now();
                 $data->updated_at = null;
                 $data->save();
