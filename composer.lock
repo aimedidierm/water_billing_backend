@@ -4,8 +4,70 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad697d6656e21b19281012351c1aecbc",
+    "content-hash": "b1aa21157d4b513da2a2498e9e34b1a2",
     "packages": [
+        {
+            "name": "aimedidierm/intouchsms",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aimedidierm/intouchsms.git",
+                "reference": "b36d7dc92bf961d1e39bea3167546503c2939f9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aimedidierm/intouchsms/zipball/b36d7dc92bf961d1e39bea3167546503c2939f9e",
+                "reference": "b36d7dc92bf961d1e39bea3167546503c2939f9e",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.2",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "composer/composer": "^1.10",
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
+                "ergebnis/composer-normalize": "^2.5",
+                "hamcrest/hamcrest-php": "^2",
+                "mockery/mockery": "^1.3",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/extension-installer": "^1",
+                "phpstan/phpstan": "^0.12.25",
+                "phpstan/phpstan-mockery": "^0.12.5",
+                "phpstan/phpstan-phpunit": "^0.12.8",
+                "phpunit/phpunit": "^9.1",
+                "psy/psysh": "^0.10.4",
+                "slevomat/coding-standard": "^8.13.1",
+                "squizlabs/php_codesniffer": "^3.5",
+                "vimeo/psalm": "^3.11"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aimedidierm\\IntouchSms\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aime Didier Mugisha",
+                    "email": "aimedidiermugisha@gmail.com"
+                },
+                {
+                    "name": "Yves Niyobuhungiro",
+                    "email": "niyobuhungiro.yves@gmail.com"
+                }
+            ],
+            "description": "This is a php library to help developers include sms service, with IntouchSms gateway from RWANDA",
+            "support": {
+                "issues": "https://github.com/aimedidierm/intouchsms/issues",
+                "source": "https://github.com/aimedidierm/intouchsms/tree/v1.0.0"
+            },
+            "time": "2023-07-20T23:04:15+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
@@ -3833,6 +3895,59 @@
                 "source": "https://github.com/bobthecow/psysh/tree/v0.11.20"
             },
             "time": "2023-07-31T14:32:22+00:00"
+        },
+        {
+            "name": "quarksgroup/paypack-php",
+            "version": "v0.1.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/quarksgroup/paypack-php.git",
+                "reference": "0477b6a493ec112ca58b3c67d3a3b45d71684aa6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/quarksgroup/paypack-php/zipball/0477b6a493ec112ca58b3c67d3a3b45d71684aa6",
+                "reference": "0477b6a493ec112ca58b3c67d3a3b45d71684aa6",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.4",
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Paypack\\": "src/"
+                },
+                "classmap": [
+                    "src/Paypack.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Quarks Group",
+                    "email": "info@quarksgroup.rw"
+                }
+            ],
+            "description": "Paypack SDK for PHP Integration",
+            "homepage": "https://paypack.rw/",
+            "keywords": [
+                "payment processing",
+                "paypack",
+                "paypack SDK",
+                "paypack php",
+                "paypack rwanda",
+                "rwanda payment"
+            ],
+            "support": {
+                "issues": "https://github.com/quarksgroup/paypack-php/issues",
+                "source": "https://github.com/quarksgroup/paypack-php/tree/v0.1.9"
+            },
+            "time": "2022-12-02T16:26:36+00:00"
         },
         {
             "name": "ralouphie/getallheaders",

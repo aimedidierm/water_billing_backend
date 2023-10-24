@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Billing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Paypack\Paypack;
 
 class BillingController extends Controller
 {
@@ -38,7 +39,12 @@ class BillingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fee = 100;
+        $phone = "0788760979";
+        $paypackInstance = $this->paypackConfig()->Cashin([
+            "amount" => $fee,
+            "phone" => $phone,
+        ]);
     }
 
     /**
@@ -71,5 +77,17 @@ class BillingController extends Controller
     public function destroy(Billing $billing)
     {
         //
+    }
+
+    public function paypackConfig()
+    {
+        $paypack = new Paypack();
+
+        $paypack->config([
+            'client_id' => env('PAYPACK_CLIENT_ID'),
+            'client_secret' => env('PAYPACK_CLIENT_SECRET'),
+        ]);
+
+        return $paypack;
     }
 }
