@@ -51,7 +51,7 @@ class MeterReadingsController extends Controller
             ], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $meter = Meter::where('meterId', $request->meter_id)->first();
+        $meter = Meter::latest()->first();
         if ($meter) {
             $lastReadings = MeterReadings::latest()->where('meter_id', $meter->id)->first();
             $lastVolume = 0;
