@@ -40,7 +40,7 @@ class MeterReadingsController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                "readings" => "required",
+                "readings" => "required|numeric",
                 "meter_id" => "required|string",
             ]
         );
@@ -51,7 +51,7 @@ class MeterReadingsController extends Controller
             ], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $meter = Meter::latest()->first();
+        $meter = Meter::where('meterId', $request->meter_id)->first();
         if ($meter) {
             $lastReadings = MeterReadings::latest()->where('meter_id', $meter->id)->first();
             $lastVolume = 0;

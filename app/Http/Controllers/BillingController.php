@@ -45,8 +45,8 @@ class BillingController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                "billing_id" => "required",
-                "phone" => "required",
+                "billing_id" => "required|numeric",
+                "phone" => "required|numeric",
             ]
         );
         if ($validator->fails()) {
@@ -58,9 +58,9 @@ class BillingController extends Controller
         $billing = Billing::find($request->billing_id);
         $billing->status = 'payed';
         $billing->update();
-        $message = "Dear client thank for sending your payment";
+        $message = "Dear client we received your payment of " . $billing->amount . " Rwf, Thank you.";
         $sms = new Sms();
-        $sms->recipients([$billing->phone])
+        $sms->recipients([$request->phone])
             ->message($message)
             ->sender(env('SMS_SENDERID'))
             ->username(env('SMS_USERNAME'))
