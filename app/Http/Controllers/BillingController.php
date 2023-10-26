@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Billing;
+use App\Services\Sms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Paypack\Paypack;
+use Illuminate\Http\Response as HttpResponse;
 
 class BillingController extends Controller
 {
@@ -39,12 +42,39 @@ class BillingController extends Controller
      */
     public function store(Request $request)
     {
-        $fee = 100;
-        $phone = "0788760979";
+        $validator = Validator::make(
+            $request->all(),
+            [
+                "billing_id" => "required",
+                "phone" => "required",
+            ]
+        );
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $validator->errors()->all(),
+            ], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        $billing = Billing::find($request->billing_id);
+        $billing->status = 'payed';
+        $billing->update();
+        $message = "Dear client thank for sending your payment";
+        $sms = new Sms();
+        $sms->recipients([$billing->phone])
+            ->message($message)
+            ->sender(env('SMS_SENDERID'))
+            ->username(env('SMS_USERNAME'))
+            ->password(env('SMS_PASSWORD'))
+            ->apiUrl("www.intouchsms.co.rw/api/sendsms/.json")
+            ->callBackUrl("");
+        $sms->send();
         $paypackInstance = $this->paypackConfig()->Cashin([
-            "amount" => $fee,
-            "phone" => $phone,
+            "amount" => $billing->amount,
+            "phone" => $request->phone,
         ]);
+        return response()->json([
+            $billing
+        ], 200);
     }
 
     /**

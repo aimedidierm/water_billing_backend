@@ -40,4 +40,5 @@ Route::group(["prefix" => "client", "middleware" => ["auth:api", "clientCheck"],
     Route::get('/settings', [UserController::class, 'show']);
     Route::apiResource('/readings', MeterReadingsController::class)->only('index', 'store');
     Route::get('/billing', [BillingController::class, 'clientListing']);
+    Route::Post('/billing', [BillingController::class, 'store']);
 });
